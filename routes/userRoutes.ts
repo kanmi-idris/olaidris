@@ -1,35 +1,18 @@
-import { Request, Response, Router } from "express";
+// import * as userController from "@controllers/userController";
+import { createUser } from "@controllers/userController";
+import { Router } from "express";
 
 const userRouter = Router();
 
-userRouter.post("/register", (req: Request, res: Response) => {
-  // userController.registerUser(req, res);
-  console.log(req, res);
-});
+// console.log("user Routerssss");
+userRouter.post("/create-user", createUser);
 
-userRouter.post("/login", (req: Request, res: Response) => {
-  // userController.loginUser(req, res);
-  console.log(req, res);
-});
-
-userRouter.post("/refresh-token", (req: Request, res: Response) => {
-  // userController.refreshToken(req, res);
-  console.log(req, res);
-});
-
-userRouter.delete("/delete-user", (req: Request, res: Response) => {
-  // userController.deleteUser(req, res);
-  console.log(req, res);
-});
-
-userRouter.post("/forgot-password", (req: Request, res: Response) => {
-  // userController.sendOTP(req, res);
-  console.log(req, res);
-});
-
-userRouter.post("/reset-password", (req: Request, res: Response) => {
-  // userController.resetPassword(req, res);
-  console.log(req, res);
-});
+// Other routes (currently commented out)
+// userRouter.post("/user-login", userController.loginUser);
+// userRouter.post("/refresh-token", userController.refreshToken);
+// userRouter.delete("/delete-user", userController.deleteUser);
+// userRouter.post("/forgot-password", userController.sendOTP);
+// userRouter.post("/reset-password", userController.resetPassword);
+// userRouter.post("/check-ip/:ip", userController.checkIp);
 
 export default userRouter;

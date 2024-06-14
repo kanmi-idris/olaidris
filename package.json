@@ -4,10 +4,12 @@
   "description": "Olasunkanmi Idris Personal Portfolio",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && ts-node app.ts",
-    "dev": "tsc && nodemon -r tsconfig-paths/register app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "rimraf dist && npx tsc",
+    "prestart": "yarn build",
+    "start": "node dist/app.js",
+    "preserve": "yarn build",
+    "serve": "npx concurrently \"npx tsc -w\" \"nodemon dist/app.js\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +21,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
     "marked": "^13.0.0",
-    "mongoose": "^8.4.1"
+    "mongoose": "^8.4.1",
+    "rimraf": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",

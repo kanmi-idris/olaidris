@@ -8,10 +8,13 @@ import educationRouter from "@routes/educationRoutes";
 import projectsRouter from "@routes/projectsRoutes";
 import userRouter from "@routes/userRoutes";
 import cors from "cors";
+// import { config } from "dotenv";
 import express, { Request, Response } from "express";
 import { marked } from "marked";
+// import "module-alias/register";
 import mongoose from "mongoose";
 
+// config();
 connectDB();
 
 const app = express();

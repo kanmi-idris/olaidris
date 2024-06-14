@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "module": "commonjs",
-    "target": "es6",
+    "target": "ES2016",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "paths": {
       "@config/*": ["./config/*"],
       "@controllers/*": ["./controllers/*"],
-      "@db/*": ["schemas/*"],
       "@logs/*": ["./logs/*"],
       "@middlewares/*": ["./middlewares/*"],
       "@models/*": ["./models/*"],
@@ -22,6 +20,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["es2015"]
+    "skipLibCheck": true
   }
 }
