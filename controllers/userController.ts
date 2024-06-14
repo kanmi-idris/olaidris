@@ -1,6 +1,12 @@
 import User from "@models/userModel";
+import responseHandler from "@utils/responseHandler";
 import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
+
+// Removed the ip field from all documents
+// User.updateMany({}, { $unset: { ip: "" } })
+//   .then((result) => console.log("IP field removed from all documents:", result))
+//   .catch((error) => console.error("Error removing IP field:", error));
 
 export const createUser = expressAsyncHandler(
   async (req: Request, res: Response) => {
@@ -16,18 +22,15 @@ export const createUser = expressAsyncHandler(
       } else {
         let newUser = new User(req.body);
         let savedUser = await newUser.save();
-        res.status(201).json({
-          status: 201,
-          message: "account creation successful",
-          user: savedUser.toObject(),
-        });
+        responseHandler.sendSuccess(
+          res,
+          "account creation successful",
+          savedUser.toObject(),
+          201
+        );
       }
     } catch (error) {
-      res.status(500).json({
-        status: 500,
-        message: "account creation failed",
-        error: error,
-      });
+      responseHandler.sendError(res, "account creation failed", error, 500);
     }
   }
 );

@@ -4,32 +4,37 @@
   "description": "Olasunkanmi Idris Personal Portfolio",
   "main": "dist/app.js",
   "scripts": {
+    "lint": "eslint .",
     "build": "rimraf dist && npx tsc",
     "prestart": "yarn build",
     "start": "node dist/app.js",
     "preserve": "yarn build",
-    "serve": "npx concurrently \"npx tsc -w\" \"nodemon dist/app.js\" ",
+    "serve": "npx concurrently \"npx tsc -w\"  \"nodemon dist/app.js\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Olasunkanmi IDRIS",
   "license": "MIT",
   "directories": {
     "test": "tests"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
+    "express-validator": "^7.1.0",
     "marked": "^13.0.0",
     "mongoose": "^8.4.1",
     "rimraf": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.14.2",
@@ -38,21 +43,21 @@
     "module-alias": "^2.2.3",
     "nodemon": "^2.0.0",
     "ts-node": "^10.0.0",
-    "tsconfig-paths": "^4.2.0",
+    "ttypescript": "^1.5.15",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.13.0"
+    "typescript-eslint": "^7.13.0",
+    "typescript-transform-paths": "^3.4.7"
   },
   "_moduleAliases": {
-    "@config": "dist/config",
-    "@controllers": "dist/controllers",
-    "@db": "dist/db",
-    "@logs": "dist/logs",
-    "@middlewares": "dist/middlewares",
-    "@models": "dist/models",
-    "@routes": "dist/routes",
-    "@scripts": "dist/scripts",
-    "@services": "dist/services",
-    "@tests": "dist/tests",
-    "@utils": "dist/utils"
+    "@config": "./dist/config",
+    "@controllers": "./dist/controllers",
+    "@logs": "./dist/logs",
+    "@middlewares": "./dist/middlewares",
+    "@models": "./dist/models",
+    "@routes": "./dist/routes",
+    "@scripts": "./dist/scripts",
+    "@services": "./dist/services",
+    "@tests": "./dist/tests",
+    "@utils": "./dist/utils"
   }
 }

@@ -17,12 +17,6 @@ const userSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    ip: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
   },
   { timestamps: true }
 );

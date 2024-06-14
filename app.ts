@@ -1,5 +1,7 @@
-require("module-alias/register");
-require("dotenv").config();
+import { config } from "dotenv";
+import "module-alias/register.js";
+config();
+
 import connectDB from "@config/dbConfig";
 import envConfig from "@config/envConfig";
 import accoladesRouter from "@routes/accoladesRoutes";
@@ -8,18 +10,16 @@ import educationRouter from "@routes/educationRoutes";
 import projectsRouter from "@routes/projectsRoutes";
 import userRouter from "@routes/userRoutes";
 import cors from "cors";
-// import { config } from "dotenv";
 import express, { Request, Response } from "express";
+import fs from "fs";
 import { marked } from "marked";
-// import "module-alias/register";
 import mongoose from "mongoose";
+import path from "path";
 
-// config();
+// Connecting to the database
 connectDB();
 
 const app = express();
-const fs = require("fs");
-const path = require("path");
 
 app.use(cors());
 app.use(express.json());

@@ -1,11 +1,11 @@
 // import * as userController from "@controllers/userController";
 import { createUser } from "@controllers/userController";
+import { validateEmailAndHashPassword } from "@middlewares/authMiddleware";
 import { Router } from "express";
 
 const userRouter = Router();
 
-// console.log("user Routerssss");
-userRouter.post("/create-user", createUser);
+userRouter.post("/create-user", validateEmailAndHashPassword, createUser);
 
 // Other routes (currently commented out)
 // userRouter.post("/user-login", userController.loginUser);
