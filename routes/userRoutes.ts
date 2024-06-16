@@ -1,18 +1,28 @@
 // import * as userController from "@controllers/userController";
-import { createUser } from "@controllers/userController";
-import { validateEmailAndHashPassword } from "@middlewares/authMiddleware";
+import {
+  createUser,
+  deleteUser,
+  loginUser,
+  refreshToken,
+} from "@controllers/userController";
+import {
+  authenticateUser,
+  validateEmailAndHashPassword,
+} from "@middlewares/authMiddleware";
 import { Router } from "express";
+import { body } from "express-validator";
 
 const userRouter = Router();
 
 userRouter.post("/create-user", validateEmailAndHashPassword, createUser);
-
-// Other routes (currently commented out)
-// userRouter.post("/user-login", userController.loginUser);
-// userRouter.post("/refresh-token", userController.refreshToken);
-// userRouter.delete("/delete-user", userController.deleteUser);
+userRouter.post(
+  "/user-login",
+  body("email").isEmail().withMessage("Invalid Email Address"),
+  loginUser
+);
+userRouter.delete("/delete-user/:id", authenticateUser, deleteUser);
+userRouter.post("/refresh-token/:id", refreshToken);
 // userRouter.post("/forgot-password", userController.sendOTP);
 // userRouter.post("/reset-password", userController.resetPassword);
-// userRouter.post("/check-ip/:ip", userController.checkIp);
 
 export default userRouter;

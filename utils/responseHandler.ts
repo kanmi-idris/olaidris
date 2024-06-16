@@ -3,8 +3,8 @@ const responseHandler = {
   sendSuccess: (
     res: Response,
     message: string,
-    data: any,
-    statusCode: number
+    statusCode: number,
+    data?: any
   ) => {
     res.status(statusCode).json({
       success: true,
@@ -16,8 +16,8 @@ const responseHandler = {
   sendError: (
     res: Response,
     message: string,
-    error: unknown,
-    statusCode: number
+    statusCode: number,
+    error?: unknown
   ) => {
     res.status(statusCode).json({
       success: false,

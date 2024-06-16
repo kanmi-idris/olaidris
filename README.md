@@ -12,7 +12,6 @@ my-backend-app/
 │
 ├── config/
 │ ├── dbConfig.js
-│ └── envConfig.js
 │
 ├── controllers/
 │ ├── portfolioController.js
@@ -88,7 +87,6 @@ Certainly! Let's dive into the details of each folder in the context of a portfo
    - **Purpose**: Stores configuration settings for different environments (development, production), database, and other services.
    - **Sample Files**:
      - `dbConfig.js`: Contains database connection settings.
-     - `envConfig.js`: Manages environment variables and API keys.
 
 2. **`controllers/`**:
 

@@ -5,12 +5,13 @@
   "main": "dist/app.js",
   "scripts": {
     "lint": "eslint .",
-    "build": "rimraf dist && npx tsc",
+    "build": "rimraf dist && npx tsc && yarn generate-jwt-keys",
     "prestart": "yarn build",
     "start": "node dist/app.js",
     "preserve": "yarn build",
     "serve": "npx concurrently \"npx tsc -w\"  \"nodemon dist/app.js\" ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-jwt-keys": "node dist/scripts/generateJWTKeypair.js"
   },
   "keywords": [],
   "author": "Olasunkanmi IDRIS",
@@ -25,6 +26,7 @@
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "express-validator": "^7.1.0",
+    "jose": "^5.4.0",
     "marked": "^13.0.0",
     "mongoose": "^8.4.1",
     "rimraf": "^5.0.7"
