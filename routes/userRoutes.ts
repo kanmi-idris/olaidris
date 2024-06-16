@@ -4,6 +4,7 @@ import {
   deleteUser,
   loginUser,
   refreshToken,
+  resetPassword,
 } from "@controllers/userController";
 import {
   authenticateUser,
@@ -23,6 +24,6 @@ userRouter.post(
 userRouter.delete("/delete-user/:id", authenticateUser, deleteUser);
 userRouter.post("/refresh-token/:id", refreshToken);
 // userRouter.post("/forgot-password", userController.sendOTP);
-// userRouter.post("/reset-password", userController.resetPassword);
+userRouter.post("/reset-password", validateEmailAndHashPassword, resetPassword);
 
 export default userRouter;

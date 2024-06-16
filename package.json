@@ -29,6 +29,7 @@
     "jose": "^5.4.0",
     "marked": "^13.0.0",
     "mongoose": "^8.4.1",
+    "postmark": "^4.0.2",
     "rimraf": "^5.0.7"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import User from "@models/userModel";
 import responseHandler from "@utils/responseHandler";
 import { decryptToken, generateEncryptedToken } from "@utils/tokenGenerator";
 import bcrypt from "bcryptjs";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 
 // This will delete all documents where the `ip` field exists
@@ -113,7 +113,7 @@ export const deleteUser = expressAsyncHandler(
 );
 
 export const refreshToken = expressAsyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const currentTime = Math.floor(Date.now() / 1000);
     let userId = req.params.id;
     const user = await User.findById(userId);
@@ -143,7 +143,7 @@ export const refreshToken = expressAsyncHandler(
         user.refreshToken = newRefreshToken;
         await user.save();
 
-        next();
+        // next();
       } else {
         // Refresh token is invalid or expired
         return responseHandler.sendError(
@@ -160,6 +160,26 @@ export const refreshToken = expressAsyncHandler(
         "Unauthorized",
         401,
         "User not found or no refresh token"
+      );
+    }
+  }
+);
+
+export const resetPassword = expressAsyncHandler(
+  async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      responseHandler.sendError(res, "User not found", 404, "User not found");
+    } else {
+      user.password = password;
+      await user.save();
+      responseHandler.sendSuccess(
+        res,
+        "Password reset successful",
+        200,
+        user.toObject()
       );
     }
   }
