@@ -6,6 +6,7 @@ import connectDB from "@config/dbConfig";
 import accoladesRouter from "@routes/accoladesRoutes";
 import certificationsRouter from "@routes/certificationsRoutes";
 import educationRouter from "@routes/educationRoutes";
+import experienceRouter from "@routes/experienceRoutes";
 import projectsRouter from "@routes/projectsRoutes";
 import userRouter from "@routes/userRoutes";
 import cors from "cors";
@@ -45,6 +46,7 @@ app.use("/api/certification", certificationsRouter);
 app.use("/api/accolades", accoladesRouter);
 app.use("/api/education", educationRouter);
 app.use("/api/projects", projectsRouter);
+app.use("/api/experiences", experienceRouter);
 
 mongoose.connection.once("open", () => {
   console.log("Database Connection Successful");

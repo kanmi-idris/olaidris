@@ -27,8 +27,16 @@ const experienceSchema: Schema = new Schema(
         required: true,
       },
       endDate: {
-        type: Date,
+        type: Schema.Types.Mixed, // Allow both Date and String
         required: true,
+        validate: {
+          validator: function (v: any) {
+            // Checking if the value is a Date or 'present'
+            return !isNaN(Date.parse(v)) || v === "present";
+          },
+          message: (props: { value: any }) =>
+            `${props.value} is not a valid end date!`,
+        },
       },
     },
     achievements: [
