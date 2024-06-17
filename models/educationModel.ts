@@ -23,8 +23,16 @@ const educationSchema: Schema = new Schema(
     },
     duration: {
       startDate: {
-        type: Date,
+        type: Schema.Types.Mixed, // Allow both Date and String
         required: true,
+        validate: {
+          validator: function (v: any) {
+            // Checking if the value is a Date or 'expected'
+            return !isNaN(Date.parse(v)) || v === "expected";
+          },
+          message: (props: { value: any }) =>
+            `${props.value} is not a valid end date!`,
+        },
       },
       endDate: {
         type: Date,
