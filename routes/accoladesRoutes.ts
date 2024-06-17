@@ -1,25 +1,18 @@
-import { Request, Response, Router } from "express";
+import {
+  createAccolade,
+  deleteAccolade,
+  editAccolade,
+  getAllAccolades,
+  getSingleAccolade,
+} from "@controllers/accoladesController";
+import { authenticateUser } from "@middlewares/authMiddleware";
+import { Router } from "express";
 
 const accoladesRouter = Router();
 
-accoladesRouter.get("/", (req: Request, res: Response) => {
-  console.log(req, res);
-});
-
-accoladesRouter.get("/:id", (req: Request, res: Response) => {
-  console.log(req, res);
-});
-
-accoladesRouter.post("/create", (req: Request, res: Response) => {
-  console.log(req, res);
-});
-
-accoladesRouter.put("/edit/:id", (req: Request, res: Response) => {
-  console.log(req, res);
-});
-
-accoladesRouter.delete("/delete/:id", (req: Request, res: Response) => {
-  console.log(req, res);
-});
-
+accoladesRouter.get("/", authenticateUser, getAllAccolades);
+accoladesRouter.post("/create", authenticateUser, createAccolade);
+accoladesRouter.get("/:id", authenticateUser, getSingleAccolade);
+accoladesRouter.put("/edit/:id", authenticateUser, editAccolade);
+accoladesRouter.delete("/delete/:id", authenticateUser, deleteAccolade);
 export default accoladesRouter;

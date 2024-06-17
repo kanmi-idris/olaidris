@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { ICertificate } from "./types";
 
-const certificateSchema: Schema = new Schema(
+const certificationSchema: Schema = new Schema(
   {
     sponsor: {
       type: String,
@@ -15,10 +15,6 @@ const certificateSchema: Schema = new Schema(
       type: Date,
       required: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
     logo_uri: {
       type: String,
       required: false,
@@ -31,9 +27,9 @@ const certificateSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-const Certificate: Model<ICertificate> = mongoose.model<ICertificate>(
-  "Certificate",
-  certificateSchema
+const Certification: Model<ICertificate> = mongoose.model<ICertificate>(
+  "Certification",
+  certificationSchema
 );
 
-export default Certificate;
+export default Certification;

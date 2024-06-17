@@ -51,6 +51,12 @@ export const authenticateUser = async (
     if (payload.exp && payload.exp < currentTime) {
       // Access token has expired
       res.redirect(`/api/user/refresh-token/${payload.userId}`);
+      responseHandler.sendSuccess(
+        res,
+        "Unauthorized",
+        401,
+        "Access token has expired"
+      );
     } else {
       // Access token is still valid
       let user = await User.findById(payload.userId);

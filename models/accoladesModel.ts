@@ -15,7 +15,7 @@ const accoladeSchema: Schema = new Schema(
       type: Date,
       default: Date.now,
     },
-    source_platform: {
+    source_platform_logo: {
       type: String,
       required: false,
     },
