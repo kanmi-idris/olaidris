@@ -33,6 +33,11 @@ export interface IProject extends Document {
   decisions: IDecision[];
 }
 
+export interface IUpload extends Document {
+  type: string;
+  uri: string;
+}
+
 export interface IAccolade extends Document {
   name: string;
   accolade: string;
