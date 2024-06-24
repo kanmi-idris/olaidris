@@ -23,10 +23,10 @@ export const createUser = expressAsyncHandler(
           409
         );
       } else {
-        let newUser = new User(req.body);
+        const newUser = new User(req.body);
         newUser.refreshToken = await generateEncryptedToken(newUser, "refresh");
 
-        let savedUser = await newUser.save();
+        const savedUser = await newUser.save();
         responseHandler.sendSuccess(
           res,
           "account creation successful",
@@ -52,7 +52,7 @@ export const loginUser = expressAsyncHandler(
     if (findUser) {
       const userDetails = findUser.toObject();
 
-      let accessToken = await generateEncryptedToken(findUser, "access");
+      const accessToken = await generateEncryptedToken(findUser, "access");
       userDetails.accessToken = accessToken;
 
       if (googleId) {
@@ -115,11 +115,11 @@ export const deleteUser = expressAsyncHandler(
 export const refreshToken = expressAsyncHandler(
   async (req: Request, res: Response) => {
     const currentTime = Math.floor(Date.now() / 1000);
-    let userId = req.params.id;
+    const userId = req.params.id;
     const user = await User.findById(userId);
 
     if (user && user.refreshToken) {
-      let refreshTokenPayload = await decryptToken(
+      const refreshTokenPayload = await decryptToken(
         user.refreshToken,
         res,
         "refresh"
@@ -127,8 +127,8 @@ export const refreshToken = expressAsyncHandler(
 
       if (refreshTokenPayload.exp && refreshTokenPayload.exp > currentTime) {
         // Refresh token is valid, issue a new access token
-        let newAccessToken = await generateEncryptedToken(user, "access");
-        let updatedUser = user.toObject();
+        const newAccessToken = await generateEncryptedToken(user, "access");
+        const updatedUser = user.toObject();
         updatedUser.accessToken = newAccessToken;
 
         res.setHeader("Authorization", `Bearer ${newAccessToken}`);
@@ -139,7 +139,7 @@ export const refreshToken = expressAsyncHandler(
           updatedUser
         );
 
-        let newRefreshToken = await generateEncryptedToken(user, "refresh");
+        const newRefreshToken = await generateEncryptedToken(user, "refresh");
         user.refreshToken = newRefreshToken;
         await user.save();
 
