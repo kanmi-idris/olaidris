@@ -16,7 +16,8 @@ export const createCertification = expressAsyncHandler(
 
       const isDuplicate = existingCertifications.some((Certification) => {
         return (
-          new Date(Certification.awarding_date) === new Date(awarding_date) &&
+          Certification.awarding_date.getTime() ===
+            new Date(awarding_date).getTime() &&
           Certification.sponsor === sponsor &&
           Certification.title === title
         );

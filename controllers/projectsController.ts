@@ -8,6 +8,16 @@ export const createProject = expressAsyncHandler(
     try {
       const { project_name, project_uri, project_date } = req.body;
 
+      const parsedProjectDate = new Date(project_date);
+
+      if (isNaN(parsedProjectDate.getTime())) {
+        return responseHandler.sendError(res, "Invalid project date", 400);
+      }
+
+      if (project_name === "" || project_uri === "" || project_date === "") {
+        return responseHandler.sendError(res, "All fields are required", 400);
+      }
+
       const existingProjects = await Project.find({
         project_name: project_name,
         project_uri: project_uri,
@@ -16,7 +26,7 @@ export const createProject = expressAsyncHandler(
 
       const isDuplicate = existingProjects.some((Project) => {
         return (
-          new Date(Project.project_date) === new Date(project_date) &&
+          parsedProjectDate.getTime() === new Date(project_date).getTime() &&
           Project.project_name === project_name &&
           Project.project_uri === project_uri
         );
@@ -26,7 +36,11 @@ export const createProject = expressAsyncHandler(
         return responseHandler.sendError(res, "Project already exists", 409);
       }
 
-      const newProject = new Project(req.body);
+      const newProject = new Project({
+        ...req.body,
+        project_date: parsedProjectDate,
+      });
+
       await newProject.save();
       responseHandler.sendSuccess(res, "Project created successfully", 201);
     } catch (error) {

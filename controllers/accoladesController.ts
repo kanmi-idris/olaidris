@@ -16,7 +16,8 @@ export const createAccolade = expressAsyncHandler(
 
       const isDuplicate = existingAccolades.some((Accolade) => {
         return (
-          new Date(Accolade.date_received) === new Date(date_received) &&
+          Accolade.date_received.getTime() ===
+            new Date(date_received).getTime() &&
           Accolade.name === name &&
           Accolade.accolade === accolade
         );

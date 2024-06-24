@@ -8,6 +8,7 @@ import certificationsRouter from "@routes/certificationsRoutes";
 import educationRouter from "@routes/educationRoutes";
 import experienceRouter from "@routes/experienceRoutes";
 import projectsRouter from "@routes/projectsRoutes";
+import uploadsRouter from "@routes/uploadsRoutes";
 import userRouter from "@routes/userRoutes";
 import cors from "cors";
 import express, { Request, Response } from "express";
@@ -30,15 +31,19 @@ app.get("/", (req: Request, res: Response) => {
   const readmePath = path.join(__dirname, "..", "README.md");
   console.log(readmePath);
 
-  fs.readFile(readmePath, "utf8", (err: any, data: any) => {
-    if (err) {
-      console.log("Error Reading Readme", err);
-      res.status(500).send("Error reading README file");
-      return;
+  fs.readFile(
+    readmePath,
+    "utf8",
+    (err: NodeJS.ErrnoException | null, data: string) => {
+      if (err) {
+        console.log("Error Reading Readme", err);
+        res.status(500).send("Error reading README file");
+        return;
+      }
+      const htmlContent = marked.parse(data);
+      res.send(htmlContent);
     }
-    const htmlContent = marked.parse(data);
-    res.send(htmlContent);
-  });
+  );
 });
 
 app.use("/api/user", userRouter);
@@ -47,6 +52,7 @@ app.use("/api/accolades", accoladesRouter);
 app.use("/api/education", educationRouter);
 app.use("/api/projects", projectsRouter);
 app.use("/api/experiences", experienceRouter);
+app.use("/api/uploads", uploadsRouter);
 
 mongoose.connection.once("open", () => {
   console.log("Database Connection Successful");
