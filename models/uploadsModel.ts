@@ -8,6 +8,10 @@ const UploadSchema: Schema = new Schema(
       required: true,
       enum: ["image", "video"],
     },
+    filename: {
+      type: String,
+      required: true,
+    },
     uri: {
       type: String,
       required: true,

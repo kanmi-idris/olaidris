@@ -19,8 +19,8 @@ export const validateEmailAndHashPassword = [
       );
     }
 
-    let salt = await bcrypt.genSalt(10);
-    let hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashedPassword;
     next();
   },
@@ -43,7 +43,7 @@ export const authenticateUser = async (
   }
 
   try {
-    let payload = await decryptToken(accessToken, res, "access");
+    const payload = await decryptToken(accessToken, res, "access");
 
     // console.log("Access token payload: ", payload);
     const currentTime = Math.floor(Date.now() / 1000);
@@ -59,7 +59,7 @@ export const authenticateUser = async (
       );
     } else {
       // Access token is still valid
-      let user = await User.findById(payload.userId);
+      const user = await User.findById(payload.userId);
 
       if (user) {
         next();

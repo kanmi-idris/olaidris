@@ -36,6 +36,7 @@ export interface IProject extends Document {
 export interface IUpload extends Document {
   type: string;
   uri: string;
+  filename: string;
 }
 
 export interface IAccolade extends Document {
